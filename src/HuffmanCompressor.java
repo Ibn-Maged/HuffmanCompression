@@ -21,7 +21,8 @@ class HuffmanNode implements Comparable<HuffmanNode>{
 
 
 public class HuffmanCompressor {
-    HashMap<String, Character> huffmanTable;
+    HashMap<Character, String> huffmanTable;
+    String output = "";
     public void compress(String stream){
         huffmanTable = new HashMap<>();
         PriorityQueue<HuffmanNode> pq = new PriorityQueue<>();
@@ -49,28 +50,14 @@ public class HuffmanCompressor {
         }
 
         traverse(pq.peek(),"");
-        ObjectOutputStream oos = null;
-        try {
-            oos = new ObjectOutputStream(new FileOutputStream("output.bin"));
-            oos.writeObject(huffmanTable);
-        } catch (IOException e){
-            e.printStackTrace();
-        }
-
-        StringBuilder outStream = new StringBuilder();
         for(char c: stream.toCharArray()){
-            outStream.append(huffmanTable.get(c));
-        }
-        try {
-            oos.writeObject(outStream.toString());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
+            output += huffmanTable.get(c);
         }
     }
 
     public void traverse(HuffmanNode node, String code){
         if(node.left == null && node.right == null){
-            huffmanTable.put(code, node.data);
+            huffmanTable.put(node.data, code);
             return;
         }
 
