@@ -1,6 +1,4 @@
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
@@ -22,8 +20,9 @@ class HuffmanNode implements Comparable<HuffmanNode>{
 
 public class HuffmanCompressor {
     HashMap<Character, String> huffmanTable;
-    String output = "";
+    String output;
     public void compress(String stream){
+        output = "";
         huffmanTable = new HashMap<>();
         PriorityQueue<HuffmanNode> pq = new PriorityQueue<>();
         HashMap<Character, Integer> freq = new HashMap<>();
@@ -63,5 +62,73 @@ public class HuffmanCompressor {
 
         traverse(node.left, code + "0");
         traverse(node.right, code + "1");
+//        writeToFile();
     }
+
+//    public void writeToFile(){
+//        File file = new File("output.bin");
+//        try {
+//            FileOutputStream fos = new FileOutputStream(file);
+//            fos.write(huffmanTable.size());
+//            huffmanTable.forEach((key, value) ->{
+//                try {
+//                    fos.write(key);
+//                    String codeLength = Integer.toBinaryString(value.length());
+//                    if(codeLength.length() < 4){
+//                        String temp = "0".repeat(4 - codeLength.length());
+//                        codeLength = temp + codeLength;
+//                    }
+//                    String code = "";
+//                    while(code.length() + value.length() < 12){
+//                        code += "0";
+//                    }
+//                    code += value;
+//                    String codeBytes = codeLength + code;
+//                    fos.write((char)Integer.parseInt(codeBytes.substring(0, 7), 2));
+//                    fos.write((char)Integer.parseInt(codeBytes.substring(8), 2));
+//                } catch (IOException e) {
+//                    throw new RuntimeException(e);
+//                }
+//            });
+//
+//        } catch (FileNotFoundException e) {
+//            throw new RuntimeException(e);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+
+//    public void readBin(){
+//        File file = new File("output.bin");
+//        try {
+//            FileInputStream fis = new FileInputStream(file);
+//            int numOfTableEntries = fis.read();
+//            for(int i = 0; i < numOfTableEntries; i++){
+//                char key = (char)fis.read();
+//                String code = "";
+//                String firstByte = Integer.toBinaryString(fis.read());
+//                firstByte += "0";
+//                if(firstByte.length() < 8){
+//                    while(code.length() + firstByte.length() < 8){
+//                        code += "0";
+//                    }
+//                }
+//                code += firstByte;
+//                String secondByte = Integer.toBinaryString(fis.read());
+//                if(secondByte.length() < 8){
+//                    while(code.length() + secondByte.length() < 16){
+//                        code += "0";
+//                    }
+//                }
+//                code += secondByte;
+//                int codeLength = Integer.parseInt(code.substring(0, 4), 2);
+//                String value = code.substring(16 - codeLength);
+//                System.out.println(key + " " + value);
+//            }
+//        } catch (FileNotFoundException e) {
+//            throw new RuntimeException(e);
+//        } catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 }

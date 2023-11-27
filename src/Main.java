@@ -5,46 +5,24 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-//        File file = new File("input.txt");
-//        String input = "";
-//        try {
-//            Scanner scanner = new Scanner(file);
-//            while(scanner.hasNextLine()){
-//                input += scanner.nextLine();
-//            }
-//        } catch (FileNotFoundException e) {
-//            throw new RuntimeException(e);
-//        }
         HuffmanCompressor hc = new HuffmanCompressor();
 //        hc.compress("AAAABABBBCC");
         hc.compress("AAABBCD");
+        HuffmanDecompressor dc = new HuffmanDecompressor();
+        dc.decompress();
+        System.out.println(dc.outputStream);
 //        hc.compress(input);
-        hc.huffmanTable.forEach((key, value)->{
-            System.out.println(key + " " + value);
-        });
+//        hc.huffmanTable.forEach((key, value)->{
+//            System.out.println(key + " " + value);
+//        });
+//        hc.readBin();
 
+//        BinReaderWriter readerWriter = new BinReaderWriter();
 //        try {
-//            ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("output.bin"));
-//            oos.writeObject(hc.huffmanTable);
+//            readerWriter.write(hc.output, hc.huffmanTable);
+////            readerWriter.read();
 //        } catch (IOException e){
 //            e.printStackTrace();
 //        }
-
-//        HashMap<String, Character> hm = new HashMap<>();
-//        try {
-//            ObjectInputStream ois = new ObjectInputStream(new FileInputStream("output.bin"));
-//            hm = (HashMap<String, Character>) ois.readObject();
-//        }catch (IOException e){
-//            e.printStackTrace();
-//        } catch (ClassNotFoundException e){
-//            e.printStackTrace();
-//        }
-//
-//        System.out.println();
-//
-//        hm.forEach((key, value)->{
-//            System.out.println(key + " " + value);
-//        });
-//    }
     }
 }
