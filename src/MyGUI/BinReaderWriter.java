@@ -1,3 +1,5 @@
+package MyGUI;
+
 import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -18,7 +20,7 @@ public class BinReaderWriter {
         }
         return res;
     }
-    public void write(String binSequence, HashMap<Character, String> huffmanTable) throws IOException {
+    public void writeBinary(String binSequence, HashMap<Character, String> huffmanTable) throws IOException {
         int lastByteBits= binSequence.length()%8;
         String lastByteBit =Integer.toBinaryString(lastByteBits);
 //        System.out.println(lastByteBit);
@@ -59,8 +61,8 @@ public class BinReaderWriter {
         }
 
     }
-    public static String readBin(HashMap<String, Character> decompressionTable) {
-        File file = new File("output.bin");
+    public static String readBin(HashMap<String, Character> decompressionTable,String fileName) {
+        File file = new File(fileName);
         try (FileInputStream fis = new FileInputStream(file)) {
             InputStreamReader reader = new InputStreamReader(fis, StandardCharsets.UTF_8);
             BufferedReader b=new BufferedReader(reader);
@@ -138,5 +140,19 @@ public class BinReaderWriter {
             text+=sc.nextLine();
         }
         return text;
+    }
+    public void writeFile(String path,String content) throws IOException {
+        File file = new File(path);
+        BufferedWriter out;
+
+        if(file.isAbsolute()){
+            out = new BufferedWriter(new FileWriter(file));
+
+        }else{
+            out = new BufferedWriter(new FileWriter(file.getAbsoluteFile()));
+
+        }
+        out.write(content);
+        out.close();
     }
 }

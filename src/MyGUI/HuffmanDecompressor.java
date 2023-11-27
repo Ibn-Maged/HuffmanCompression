@@ -1,3 +1,7 @@
+package MyGUI;
+
+import MyGUI.BinReaderWriter;
+
 import java.util.HashMap;
 
 public class HuffmanDecompressor {
@@ -5,10 +9,10 @@ public class HuffmanDecompressor {
     BinReaderWriter readerWriter;
     String inputStream;
     String outputStream;
-    public HuffmanDecompressor(){
+    public HuffmanDecompressor(String fileName){
         readerWriter = new BinReaderWriter();
         huffmanTable = new HashMap<>();
-        inputStream = readerWriter.readBin(huffmanTable);
+        inputStream = readerWriter.readBin(huffmanTable,fileName);
     }
 
     public void decompress(){
